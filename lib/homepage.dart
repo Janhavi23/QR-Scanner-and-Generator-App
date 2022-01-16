@@ -17,9 +17,9 @@ class HomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Center(
-            child: FlatButton(
+            child: TextButton(
               child: Text("Scan QR/Bar code"),
-              color: Colors.amber,
+              style: TextButton.styleFrom(backgroundColor: Colors.amber),
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => QRScanner()));
@@ -27,9 +27,9 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Center(
-            child: FlatButton(
+            child: TextButton(
               child: Text("Generate QR code"),
-              color: Colors.amber,
+              style: TextButton.styleFrom(backgroundColor: Colors.amber),
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => QRGenerator()));
@@ -37,9 +37,9 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Center(
-            child: FlatButton(
+            child: TextButton(
               child: Text("Generate Barcode code"),
-              color: Colors.amber,
+              style: TextButton.styleFrom(backgroundColor: Colors.amber),
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => BarcodeGenerator()));

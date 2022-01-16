@@ -29,10 +29,8 @@ class _QRScanner extends State<QRScanner> {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: RaisedButton(
-                    color: Colors.amber,
-                    textColor: Colors.white,
-                    splashColor: Colors.blueGrey,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.amber,textStyle: TextStyle(color: Colors.white)),
                     onPressed: scan,
                     child: const Text('SCAN')),
               ),
@@ -64,6 +62,17 @@ class _QRScanner extends State<QRScanner> {
       setState(() => this.barcode = '');
     } catch (e) {
       setState(() => this.barcode = 'Unknown error: $e');
+    }
+
+    if(DateTime.parse(barcode).compareTo(DateTime.now())>0){
+      setState(() {
+        barcode = "It is good to use";
+      });
+    }
+    else{
+      setState(() {
+        barcode = "It is expired";
+      });
     }
   }
 }

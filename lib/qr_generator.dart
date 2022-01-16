@@ -53,8 +53,8 @@ class _QRGeneratorState extends State<QRGenerator> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
-                    child: FlatButton(
-                      color: Colors.amber,
+                    child: TextButton(
+                      style: TextButton.styleFrom(primary: Colors.amber),
                       child: Text("SUBMIT"),
                       onPressed: () {
                         setState(() {
