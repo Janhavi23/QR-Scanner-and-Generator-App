@@ -22,22 +22,25 @@ class _QRScanner extends State<QRScanner> {
     return Scaffold(
         appBar: AppBar(
           title: Text('QR Code Scanner'),
+          backgroundColor: Colors.lightBlueAccent,
         ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              Container(
+                width: 200,
                 child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Colors.amber,textStyle: TextStyle(color: Colors.white)),
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.indigoAccent,
+                        textStyle: TextStyle(color: Colors.white)),
                     onPressed: scan,
                     child: const Text('SCAN')),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 child: Text(
-                  barcode,
+                  "Expiry Date:"+ barcode,
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -63,16 +66,48 @@ class _QRScanner extends State<QRScanner> {
     } catch (e) {
       setState(() => this.barcode = 'Unknown error: $e');
     }
+    if (barcode != "") {
+      if (DateTime.parse(barcode).compareTo(DateTime.now()) > 0) {
+        setState(() {
+         // barcode = "It is good to use";
+          _showMaterialDialog("It is good to use",barcode,'assets/right.png');
+        });
+      } else {
+        setState(() {
+         // barcode = "It is expired";
+          _showMaterialDialog("It is expired",barcode,'assets/wrong.jpg');
+        });
+      }
+    }
+  }
 
-    if(DateTime.parse(barcode).compareTo(DateTime.now())>0){
-      setState(() {
-        barcode = "It is good to use";
-      });
-    }
-    else{
-      setState(() {
-        barcode = "It is expired";
-      });
-    }
+  _dismissDialog() {
+    Navigator.pop(context);
+  }
+    void _showMaterialDialog(String data,String date,String image) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Xpire Alert'),
+            content: Container(
+              height: 100,
+              child: Column(
+                children: [
+                  Image(image: AssetImage(image),height:50,width:80),
+                  Text(data),
+                  Text("Expiry Date: "+date)
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                  onPressed: () {
+                    _dismissDialog();
+                  },
+                  child: Text('Close')),
+            ],
+          );
+        });
   }
 }

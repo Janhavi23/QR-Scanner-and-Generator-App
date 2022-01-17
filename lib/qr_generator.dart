@@ -19,6 +19,7 @@ class _QRGeneratorState extends State<QRGenerator> {
     return Scaffold(
         appBar: AppBar(
           title: Text('QR Generator'),
+          backgroundColor: Colors.lightBlueAccent,
         ),
         body: _contentWidget());
   }
@@ -54,7 +55,7 @@ class _QRGeneratorState extends State<QRGenerator> {
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
                     child: TextButton(
-                      style: TextButton.styleFrom(primary: Colors.amber),
+                      style: TextButton.styleFrom(primary:Colors.white,backgroundColor:Colors.indigoAccent ),
                       child: Text("SUBMIT"),
                       onPressed: () {
                         setState(() {
